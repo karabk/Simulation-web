@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/components/FileUpload/FileUpload.tsx","./src/components/RequestEditor/RequestEditor.tsx","./src/components/ResponseViewer/ResponseViewer.tsx","./src/components/SimulationGuide/SimulationGuide.tsx","./src/components/VulnerabilityList/VulnerabilityList.tsx","./src/hooks/useSimulation.ts","./src/types/api.ts","./src/ui/App.tsx"],"version":"5.9.2"}
