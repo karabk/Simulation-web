@@ -57,7 +57,7 @@ router.get('/profile', (req, res) => {
       return res.status(401).json({
         note: 'SQL error due to unescaped single quote',
         query: concatenatedQuery,
-        error: 'SQL syntax error near \''\'',
+        error: 'SQL syntax error near single quote',
       });
     }
 
