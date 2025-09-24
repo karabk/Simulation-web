@@ -5,6 +5,7 @@ import { ResponseViewer } from '../components/ResponseViewer/ResponseViewer';
 import { FileUpload } from '../components/FileUpload/FileUpload';
 import { SimulationGuide } from '../components/SimulationGuide/SimulationGuide';
 import { ApiScenario, HttpRequestModel, HttpResponseModel } from '../types/api';
+import { API_BASE } from '../config';
 
 export const App: React.FC = () => {
   const [scenarios, setScenarios] = useState<ApiScenario[]>([]);
@@ -14,18 +15,18 @@ export const App: React.FC = () => {
   const [history, setHistory] = useState<HttpRequestModel[]>([]);
 
   useEffect(() => {
-    fetch('/api/simulations/list').then(r => r.json()).then(d => setScenarios(d.scenarios));
+    fetch(`${API_BASE}/api/simulations/list`).then(r => r.json()).then(d => setScenarios(d.scenarios));
   }, []);
 
   function handleSelect(s: ApiScenario) {
     setSelected(s);
     // prefill
     if (s.id === 'sqli-user-agent') {
-      setRequestModel({ method: 'GET', url: '/api/user/profile', headers: { 'User-Agent': "Mozilla/5.0' AND 1=1 --" }, body: '' });
+      setRequestModel({ method: 'GET', url: `${API_BASE}/api/user/profile`, headers: { 'User-Agent': "Mozilla/5.0' AND 1=1 --" }, body: '' });
     } else if (s.id === 'path-traversal-translations') {
-      setRequestModel({ method: 'GET', url: '/api/translations/en', headers: {}, body: '' });
+      setRequestModel({ method: 'GET', url: `${API_BASE}/api/translations/en`, headers: {}, body: '' });
     } else if (s.id === 'path-traversal-download') {
-      setRequestModel({ method: 'POST', url: '/api/documents/download', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ file: 'user_docs/report.pdf' }, null, 2) });
+      setRequestModel({ method: 'POST', url: `${API_BASE}/api/documents/download`, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ file: 'user_docs/report.pdf' }, null, 2) });
     }
   }
 

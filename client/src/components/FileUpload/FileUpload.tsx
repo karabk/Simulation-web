@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_BASE } from '../../config';
 
 interface Props { onLoaded: (content: string) => void }
 
@@ -14,7 +15,7 @@ export const FileUpload: React.FC<Props> = ({ onLoaded }) => {
     try {
       const form = new FormData();
       form.append('file', file);
-      const resp = await fetch('/api/upload', { method: 'POST', body: form });
+      const resp = await fetch(`${API_BASE}/api/upload`, { method: 'POST', body: form });
       const data = await resp.json();
       if (data?.preview) {
         onLoaded(typeof data.preview === 'string' ? data.preview : JSON.stringify(data.preview, null, 2));

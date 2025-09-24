@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ApiScenario } from '../types/api';
+import { API_BASE } from '../config';
 
 export function useSimulationList() {
   const [scenarios, setScenarios] = useState<ApiScenario[]>([]);
@@ -9,7 +10,7 @@ export function useSimulationList() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    fetch('/api/simulations/list')
+    fetch(`${API_BASE}/api/simulations/list`)
       .then(r => r.json())
       .then(d => { if (!cancelled) setScenarios(d.scenarios || []); })
       .catch(e => { if (!cancelled) setError(e.message); })
