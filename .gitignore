@@ -1,0 +1,12 @@
+node_modules
+dist
+dist_public
+*.log
+*.tmp
+*.DS_Store
+client/dist
+server/dist
+server/dist_public
+client/node_modules
+server/node_modules
+*.zip

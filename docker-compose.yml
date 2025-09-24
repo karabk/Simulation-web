@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - SAFE_ROOT=/tmp/websec-sim
+    ports:
+      - "8080:8080"
+    volumes:
+      - server_data:/tmp/websec-sim
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE=/
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+volumes:
+  server_data:
